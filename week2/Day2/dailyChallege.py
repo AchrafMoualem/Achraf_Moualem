@@ -50,7 +50,7 @@ class Pagination:
         return self.current_idx + 1
 
 
-items = list("abcdefghijklmnopqrstuvwxy")  # [1, 2, 3, ..., 15]
+items = list("abcdefghijklmnopqrstuvwxy")
 pagination = Pagination(items=items, page_size=4)
 
 print("Start:", pagination)
@@ -71,12 +71,17 @@ print("Last page:", pagination.get_visible_items())
 pagination.first_page()
 print("First page:", pagination.get_visible_items())
 
-# Method chaining
 pagination.first_page().next_page().next_page()
 print("Chained to page 3:", pagination.get_visible_items())
 
-# Error test
-try:
-    pagination.go_to_page(10)
-except ValueError as e:
-    print("Error:", e)
+
+items = list("abcdefghijklmnopqrstuvwxyz")
+p = Pagination(items=items, page_size=5)
+
+print("Start:", p)
+print("Items:", p.get_visible_items())
+
+
+result = p.next_page().next_page().next_page().get_visible_items()
+print(result)
+
