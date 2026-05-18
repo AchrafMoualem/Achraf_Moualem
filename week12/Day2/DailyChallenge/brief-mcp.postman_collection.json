@@ -1,0 +1,82 @@
+{
+  "info": {
+    "name": "Brief MCP",
+    "_postman_id": "brief-mcp-collection",
+    "description": "All endpoints for the Brief MCP HTTP server.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base",  "value": "http://localhost:3000" },
+    { "key": "token", "value": "changeme" }
+  ],
+  "item": [
+    {
+      "name": "GET /tools",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{base}}/tools", "host": ["{{base}}"], "path": ["tools"] }
+      }
+    },
+    {
+      "name": "POST /tools/search_web",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type",  "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"multimodal large language models\",\n  \"k\": 5\n}"
+        },
+        "url": { "raw": "{{base}}/tools/search_web", "host": ["{{base}}"], "path": ["tools","search_web"] }
+      }
+    },
+    {
+      "name": "POST /tools/fetch_readable",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type",  "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"https://lilianweng.github.io/posts/2023-06-23-agent/\"\n}"
+        },
+        "url": { "raw": "{{base}}/tools/fetch_readable", "host": ["{{base}}"], "path": ["tools","fetch_readable"] }
+      }
+    },
+    {
+      "name": "POST /tools/summarize_with_citations",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type",  "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"topic\": \"LLM agents\",\n  \"docs\": [\n    {\n      \"title\": \"LLM Powered Autonomous Agents\",\n      \"url\": \"https://lilianweng.github.io/posts/2023-06-23-agent/\",\n      \"text\": \"LLM-powered autonomous agents use planning, memory, and tool use to complete complex tasks without human step-by-step guidance.\"\n    }\n  ]\n}"
+        },
+        "url": { "raw": "{{base}}/tools/summarize_with_citations", "host": ["{{base}}"], "path": ["tools","summarize_with_citations"] }
+      }
+    },
+    {
+      "name": "POST /tools/save_markdown",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type",  "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"filename\": \"brief_2025-05-18.md\",\n  \"content\": \"# Brief: LLM agents\\n- Agents use planning and tools [1]\\n\\n## Sources\\n1. [Lilian Weng](https://lilianweng.github.io)\"\n}"
+        },
+        "url": { "raw": "{{base}}/tools/save_markdown", "host": ["{{base}}"], "path": ["tools","save_markdown"] }
+      }
+    }
+  ]
+}
